@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hdfs-namenode
+spec:
+  selector:
+    matchLabels:
+      app: hdfs-namenode
+  replicas: {{ .Values.hdfs.namenode.replicas }}
+  template:
+    metadata:
+      labels:
+        app: hdfs-namenode
+    spec:
+      containers:
+        - name: namenode
+          image: {{ .Values.hdfs.namenode.image }}
+          ports:
+            - containerPort: {{ .Values.hdfs.namenode.port }}
+          volumeMounts:
+            - name: namenode-storage
+              mountPath: /data/namenode
+      volumes:
+        - name: namenode-storage
+          persistentVolumeClaim:
+            claimName: namenode-pvc

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: HDFS
+description: Helm chart for deploying HDFS
+version: 1.0.0
+

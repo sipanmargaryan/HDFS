@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hdfs-datanode
+spec:
+  selector:
+    matchLabels:
+      app: hdfs-datanode
+  replicas: {{ .Values.hdfs.datanode.replicas }}
+  template:
+    metadata:
+      labels:
+        app: hdfs-datanode
+    spec:
+      containers:
+        - name: datanode
+          image: {{ .Values.hdfs.datanode.image }}
+          ports:
+            - containerPort: {{ .Values.hdfs.datanode.port }}
+          volumeMounts:
+            - name: datanode-storage
+              mountPath: /data/datanode
+      volumes:
+        - name: datanode-storage
+          persistentVolumeClaim:
+            claimName: datanode-pvc
