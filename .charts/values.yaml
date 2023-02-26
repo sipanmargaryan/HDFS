@@ -1,13 +1,13 @@
 hdfs:
   namenode:
     replicas: 1
-    image: "hadoop-namenode:3.3.0"
+    image: "bde2020/hadoop-namenode"
     port: 8020
     storageClass: "standard"
     storageSize: "10Gi"
   datanode:
     replicas: 3
-    image: "hadoop-datanode:3.3.0"
+    image: "bde2020/hadoop-datanode"
     port: 9864
     storageClass: "standard"
     storageSize: "20Gi"
